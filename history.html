@@ -15,7 +15,7 @@
             --text-main: #1d1d1f; 
             --text-dim: #86868b; 
             --input-bg: rgba(255, 255, 255, 0.7); 
-            --accent: #34c759; /* হিস্টোরির জন্য সাকসেস গ্রিন টোন */
+            --accent: #34c759; 
             --accent-glow: rgba(52, 199, 89, 0.2); 
             --shadow: rgba(0, 0, 0, 0.02);
             --blob-1: #dbdaea; --blob-2: #d2e3fc; --blob-3: #e2f4f2;
@@ -76,7 +76,7 @@
         .c-side { width: 35%; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
         .tag-lbl { font-size: 10px; font-weight: 700; color: #fff; background: #34c759; padding: 3px 10px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.1); text-transform: uppercase; }
         
-        /* ─── অ্যামাউন্ট প্রাইভেসি কন্টেইনার (ক্লিক করলে শো করবে) ─── */
+        /* প্রাইভেসি এমাউন্ট কন্টেইনার */
         .secure-amount-box { 
             font-size: 13px; 
             font-weight: 800; 
@@ -125,10 +125,13 @@
 </main>
 
 <script>
+    // ওরিজিনাল স্ক্রিপ্ট URL যা আপনার ডাটাবেজের সাথে কানেক্টেড ছিল
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
     
     window.onload = () => {
         if(localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('themeBtn').innerText = "☀️ LIGHT MODE"; }
+        
+        // ওরিজিনাল getHistory অ্যাকশন মেথড কলিং রিস্টোর করা হলো
         fetch(scriptURL + "?action=getHistory").then(r => r.json()).then(data => {
             document.getElementById('loading').style.display = 'none';
             const list = document.getElementById('cardsList');
@@ -160,11 +163,9 @@
         });
     };
 
-    // টাকার অ্যামাউন্ট ক্লিক করলে শো/হাইড করার কাস্টম জাভাস্ক্রিপ্ট ফাংশন
     function toggleAmountPrivacy(event, element, realAmount) {
-        event.stopPropagation(); // কার্ডের কোলাপ্স ক্লিক ইভেন্ট লক করার জন্য
+        event.stopPropagation();
         const textSpan = element.querySelector('span');
-        
         if (textSpan.classList.contains('hidden-state')) {
             textSpan.innerText = realAmount + " ৳";
             textSpan.classList.remove('hidden-state');

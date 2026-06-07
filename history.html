@@ -1,115 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IND TECH | DELIVERY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
+    <title>IND TECH | PENDING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cabinet+Grotesk:wght@800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020617; --panel: rgba(15, 23, 42, 0.7); --accent: #d4af37; 
-            --accent-glow: rgba(212, 175, 55, 0.3); --purple-glow: rgba(124, 58, 237, 0.2);
-            --text-main: #f8fafc; --text-dim: #94a3b8; --glass-border: rgba(255, 255, 255, 0.1); --success: #00f5a0;
+            --bg: #f5f5f7; 
+            --glass-bg: rgba(255, 255, 255, 0.22); 
+            --glass-border: rgba(255, 255, 255, 0.5); 
+            --glass-shadow: rgba(0, 0, 0, 0.05); 
+            --glass-highlight: rgba(255, 255, 255, 0.9); 
+            --text-main: #1d1d1f; 
+            --text-dim: #86868b; 
+            --input-bg: rgba(255, 255, 255, 0.7); 
+            --accent: #0071e3; 
+            --accent-glow: rgba(0, 113, 227, 0.2); 
+            --shadow: rgba(0, 0, 0, 0.02);
+            --blob-1: #dbdaea; --blob-2: #d2e3fc; --blob-3: #e2f4f2;
         }
-        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; }
-        body { margin: 0; background-color: var(--bg); background-image: radial-gradient(circle at 10% 10%, var(--purple-glow) 0%, transparent 40%), radial-gradient(circle at 90% 90%, var(--accent-glow) 0%, transparent 40%); color: var(--text-main); min-height: 100vh; }
-        header { padding: 25px 8%; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .brand { font-family: 'Syncopate', sans-serif; font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; }
-        .brand span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
-        .nav-tabs { display: flex; background: var(--panel); margin: 30px 8%; padding: 8px; border-radius: 24px; border: 1px solid var(--glass-border); gap: 10px; }
-        .tab { flex: 1; padding: 15px; text-align: center; border-radius: 18px; font-size: 10px; font-weight: 800; cursor: pointer; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; text-decoration: none; }
-        .tab.active { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent-glow); }
-        main { padding: 0 8% 100px; }
-        .card { background: var(--panel); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 35px; padding: 40px; margin-bottom: 30px; }
-        label { font-size: 10px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
-        input, select { width: 100%; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-border); border-radius: 18px; padding: 18px; color: white; margin-bottom: 25px; }
-        .btn { width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 13px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; display: flex; justify-content: center; align-items: center; }
-        .btn-primary { background: var(--accent); color: #000; box-shadow: 0 10px 25px var(--accent-glow); }
-        .table-wrap { overflow-x: auto; border-radius: 25px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; }
-        th { padding: 22px; text-align: left; font-size: 11px; color: var(--accent); border-bottom: 1px solid var(--glass-border); text-transform: uppercase; }
-        td { padding: 20px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.03); }
-        .status-badge { padding: 6px 14px; border-radius: 10px; font-size: 10px; font-weight: 800; border: 1px solid; text-transform: uppercase; }
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 20px; }
+        [data-theme="dark"] {
+            --bg: #000000; 
+            --glass-bg: rgba(30, 30, 35, 0.35); 
+            --glass-border: rgba(255, 255, 255, 0.15); 
+            --glass-shadow: rgba(0, 0, 0, 0.6); 
+            --glass-highlight: rgba(255, 255, 255, 0.25); 
+            --text-main: #f2f2f7; 
+            --text-dim: #aeaeae; 
+            --input-bg: rgba(255, 255, 255, 0.05); 
+            --accent: #0a84ff; 
+            --accent-glow: rgba(10, 132, 255, 0.4); 
+            --shadow: rgba(0, 0, 0, 0.4);
+            --blob-1: #bf5af2; --blob-2: #0a84ff; --blob-3: #ff9f0a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; transition: background 0.5s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; }
+        body { background: var(--bg); color: var(--text-main); min-height: 100vh; padding-bottom: 40px; -webkit-font-smoothing: antialiased; position: relative; overflow-x: hidden; }
+        
+        .ambient-container { position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1; pointer-events: none; filter: blur(70px); opacity: 0.85; }
+        .blob { position: absolute; width: 320px; height: 320px; border-radius: 50%; mix-blend-mode: multiply; animation: orbit 25s infinite linear; }
+        [data-theme="dark"] .ambient-container { opacity: 0.35; filter: blur(110px); }
+        .blob-one { background: var(--blob-1); top: 10%; left: 15%; animation-duration: 25s; }
+        .blob-two { background: var(--blob-2); bottom: 15%; right: 10%; animation-duration: 30s; animation-direction: reverse; }
+        .blob-three { background: var(--blob-3); top: 45%; left: 35%; animation-duration: 22s; }
+
+        @keyframes orbit {
+            0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+            33% { transform: translate(120px, 80px) scale(1.1) rotate(120deg); }
+            66% { transform: translate(-70px, 130px) scale(0.9) rotate(240deg); }
+            100% { transform: translate(0px, 0px) scale(1) rotate(360deg); }
+        }
+
+        header { background: var(--glass-bg); backdrop-filter: blur(50px) saturate(200%); -webkit-backdrop-filter: blur(50px) saturate(200%); padding: 18px 5%; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px var(--glass-shadow), inset 0 1px 1px var(--glass-highlight); }
+        .brand { font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; }
+        .brand span { color: var(--accent); }
+        .theme-toggle { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 14px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 1px var(--glass-highlight); }
+        
+        .nav-tabs { display: flex; background: var(--glass-bg); margin: 20px 4%; padding: 5px; border-radius: 99px; border: 1px solid var(--glass-border); gap: 5px; box-shadow: 0 10px 30px var(--glass-shadow); }
+        .tab { flex: 1; padding: 12px 5px; text-align: center; border-radius: 99px; font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; text-decoration: none; }
+        .tab.active { background: var(--input-bg); color: var(--accent); border: 1px solid var(--glass-border); }
+        
+        main { padding: 0 4%; position: relative; z-index: 1; }
+        .search-input { width: 100%; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 14px; padding: 15px; color: var(--text-main); font-size: 14px; margin-bottom: 15px; outline: none; }
+        
+        .liquid-leader-card { background: var(--glass-bg); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--glass-border); border-radius: 20px; padding: 18px; margin-bottom: 12px; box-shadow: 0 15px 35px var(--glass-shadow), inset 0 1px 1px var(--glass-highlight); cursor: pointer; position: relative; overflow: hidden; transform: scale(1); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s, box-shadow 0.4s; }
+        .liquid-leader-card.active-glow { border-color: var(--accent); box-shadow: 0 20px 40px var(--glass-shadow), 0 0 25px var(--accent-glow), inset 0 1px 1px var(--glass-highlight); transform: scale(1.015); }
+        
+        .card-header-view { display: flex; justify-content: space-between; align-items: flex-start; }
+        .c-main { display: flex; flex-direction: column; width: 70%; }
+        
+        .c-name { font-family: 'Cabinet Grotesk', -apple-system, sans-serif; font-size: 18px; font-weight: 900; color: var(--text-main); letter-spacing: -0.2px; margin-bottom: 6px; text-transform: uppercase; line-height: 1.2; }
+        .c-hardware-meta { font-size: 12px; color: var(--text-dim); font-weight: 500; margin-top: 2px; display: flex; gap: 4px; }
+        .c-hardware-meta span { color: var(--text-main); font-weight: 600; }
+        
+        .c-side { width: 30%; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+        .tag-lbl { font-size: 10px; font-weight: 700; color: var(--accent); background: var(--input-bg); padding: 3px 10px; border-radius: 99px; border: 1px solid var(--glass-border); }
+        .status-lbl { font-size: 9px; font-weight: 800; color: #34c759; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .collapsible-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0,0,0,0.01); border-radius: 12px; }
+        .collapsible-detail.open { max-height: 200px; padding: 14px; margin-top: 14px; border: 1px solid var(--glass-border); }
+        .detail-item { font-size: 12px; margin-bottom: 4px; color: var(--text-dim); }
+        .detail-item strong { color: var(--text-main); }
+
+        .action-btn { width: 100%; background: var(--accent); color: #fff; padding: 12px; border: none; border-radius: 12px; font-weight: 700; font-size: 11px; text-transform: uppercase; margin-top: 8px; cursor: pointer; box-shadow: 0 4px 12px var(--accent-glow); }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); display: none; justify-content: center; align-items: center; z-index: 200; padding: 20px; }
+        .modal-body { background: var(--bg); border-radius: 24px; padding: 22px; width: 100%; max-width: 380px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+        select, .modal-body input { width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px; color: var(--text-main); margin-bottom: 12px; outline: none; }
     </style>
 </head>
 <body>
+
+<div class="ambient-container">
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+    <div class="blob blob-three"></div>
+</div>
+
 <header>
-    <div class="brand">IND TECH <span>ERP CORE</span></div>
-    <div style="width: 12px; height: 12px; background: var(--success); border-radius: 50%; box-shadow: 0 0 15px var(--success);"></div>
+    <div class="brand">IND TECH <span>CORE</span></div>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌓 DARK MODE</button>
 </header>
 
 <div class="nav-tabs">
-    <a href="index.html" class="tab">Registration</a>
+    <a href="index.html" class="tab">Register</a>
     <a href="delivery.html" class="tab active">Delivery</a>
-    <a href="history.html" class="tab">Audit History</a>
+    <a href="history.html" class="tab">History</a>
 </div>
 
 <main>
-    <section id="sectionDash">
-        <div class="card">
-            <label>LIVE SEARCH PENDING JOBS</label>
-            <input type="text" id="dashSearch" onkeyup="searchTable('dashTable', 'dashSearch')" placeholder="FILTER BY CLIENT, SERIAL OR MODEL...">
-            <div class="table-wrap">
-                <table id="dashTable">
-                    <thead><tr><th>TAG ID</th><th>CLIENT</th><th>MODEL</th><th>SERIAL</th><th>STATUS</th><th>ACTION</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+    <input type="text" id="mSearch" onkeyup="filterCards()" class="search-input" placeholder="Search by name, tag, hardware...">
+    <div id="loading" style="text-align: center; font-size: 13px; color: var(--text-dim); margin-top: 15px;">Interfacing Database Log...</div>
+    <div id="cardsList"></div>
 </main>
 
 <div id="deliveryModal" class="modal">
-    <div class="card" style="width: 100%; max-width: 450px;">
-        <h3 style="text-align: center; color: var(--accent); margin-top:0;">PROCESS DELIVERY</h3>
+    <div class="modal-body">
+        <h3 style="text-align: center; color: var(--accent); margin-bottom:15px; font-size:15px; font-weight:700;">PROCESS DISPATCH</h3>
         <input type="hidden" id="releaseRow">
-        <label>Payment Mode</label>
-        <select id="fPay" onchange="handleFreeService(this.value)"><option value="PAID">PAID</option><option value="DUE">DUE</option><option value="FREE SERVICE">FREE SERVICE</option></select>
-        <label>Total Final Bill</label><input type="number" id="fAmount" placeholder="0.00">
-        <label>Invoice Number</label><input type="text" id="fInvoice" placeholder="INV-000">
-        <label>Delivered To</label><input type="text" id="fReceiver" placeholder="NAME">
-        <button class="btn btn-primary" onclick="confirmRelease()">✅ COMPLETE & RELEASE</button>
-        <button class="btn" style="background:transparent; color:var(--text-dim);" onclick="closeModal()">CANCEL</button>
+        <select id="fPay"><option value="PAID">PAID</option><option value="DUE">DUE</option><option value="FREE SERVICE">FREE SERVICE</option></select>
+        <input type="number" id="fAmount" placeholder="Total Financial Amount">
+        <input type="text" id="fInvoice" placeholder="Invoice Code">
+        <input type="text" id="fReceiver" placeholder="Handed Over To Name">
+        <button class="action-btn" onclick="confirmRelease()">Complete & Dispatch</button>
+        <button class="action-btn" style="background:transparent; color:var(--text-dim);" onclick="closeModal()">Cancel</button>
     </div>
 </div>
 
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
+    
+    window.onload = () => {
+        if(localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('themeBtn').innerText = "☀️ LIGHT MODE"; }
+        fetch(scriptURL + "?action=getPending").then(r => r.json()).then(data => {
+            document.getElementById('loading').style.display = 'none';
+            const list = document.getElementById('cardsList');
+            if(!data || data.length === 0){ list.innerHTML = "<p style='text-align:center; color:var(--text-dim);'>No pending jobs</p>"; return; }
+            data.forEach(i => {
+                const card = document.createElement('div'); card.className = 'liquid-leader-card';
+                card.setAttribute('onclick', 'toggleCard(this)');
+                card.innerHTML = `
+                    <div class="card-header-view">
+                        <div class="c-main">
+                            <span class="c-name">${i.client}</span>
+                            <div class="c-hardware-meta">Board: <span>${i.model}</span></div>
+                            <div class="c-hardware-meta">S/N: <span>${i.serial || 'N/A'}</span></div>
+                        </div>
+                        <div class="c-side">
+                            <span class="tag-lbl">${i.tag}</span>
+                            <span class="status-lbl">SERVICE</span>
+                        </div>
+                    </div>
+                    <div class="collapsible-detail">
+                        <div class="detail-item"><strong>Reported Fault:</strong> ${i.issue || 'N/A'}</div>
+                        <div class="detail-item"><strong>Initial Note:</strong> ${i.remark || 'None'}</div>
+                        <button class="action-btn" onclick="event.stopPropagation(); openRelease('${i.row}')">MARK DELIVERED</button>
+                    </div>`;
+                list.appendChild(card);
+            });
+        });
+    };
 
-    window.onload = () => { loadPending(); };
-
-    function searchTable(tableId, inputId) {
-        const filter = document.getElementById(inputId).value.toUpperCase();
-        const tr = document.getElementById(tableId).getElementsByTagName("tr");
-        for (let i = 1; i < tr.length; i++) {
-            let f = false; const td = tr[i].getElementsByTagName("td");
-            for (let j = 0; j < td.length; j++) if (td[j] && td[j].innerText.toUpperCase().indexOf(filter) > -1) f = true;
-            tr[i].style.display = f ? "" : "none";
+    function toggleTheme() {
+        if(document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); document.getElementById('themeBtn').innerText = "🌓 DARK MODE";
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); document.getElementById('themeBtn').innerText = "☀️ LIGHT MODE";
         }
     }
 
-    function handleFreeService(val) {
-        const amtInput = document.getElementById('fAmount');
-        if(val === "FREE SERVICE") { amtInput.value = 0; amtInput.readOnly = true; amtInput.style.opacity = "0.3"; }
-        else { amtInput.readOnly = false; amtInput.style.opacity = "1"; }
+    function toggleCard(el) { 
+        document.querySelectorAll('.liquid-leader-card').forEach(c => { if(c !== el) c.classList.remove('active-glow'); });
+        el.classList.toggle('active-glow');
+        el.querySelector('.collapsible-detail').classList.toggle('open'); 
     }
 
-    function loadPending() {
-        const tbody = document.querySelector('#dashTable tbody');
-        tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>RETRIVING DATA...</td></tr>";
-        fetch(scriptURL + "?action=getPending").then(r => r.json()).then(data => {
-            let h = ""; 
-            data.forEach(i => { h += `<tr><td style="color:var(--accent)">${i.tag}</td><td style="font-weight:800">${i.client}</td><td>${i.model}</td><td>${i.serial}</td><td><span class="status-badge" style="color:var(--accent); border-color:var(--accent)">SERVICE</span></td><td><button class="btn btn-primary" style="padding:10px 18px; width:auto; font-size:9px;" onclick="openRelease('${i.row}')">DELIVER</button></td></tr>`; });
-            tbody.innerHTML = h || "<tr><td colspan='6' style='text-align:center;'>NO PENDING JOBS</td></tr>";
-        }).catch(() => { tbody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:red;'>CONNECTED. ERROR INTERFACING LIVE SHHET.</td></tr>"; });
+    function filterCards() {
+        const f = document.getElementById('mSearch').value.toUpperCase();
+        document.querySelectorAll('.liquid-leader-card').forEach(c => {
+            c.style.display = c.innerText.toUpperCase().indexOf(f) > -1 ? "" : "none";
+        });
     }
-
     function openRelease(row) { document.getElementById('releaseRow').value = row; document.getElementById('deliveryModal').style.display = "flex"; }
     function closeModal() { document.getElementById('deliveryModal').style.display = "none"; }
     function confirmRelease() {
         fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ action: "releaseJob", row: document.getElementById('releaseRow').value, amount: document.getElementById('fAmount').value, invoice: document.getElementById('fInvoice').value.toUpperCase(), payment: document.getElementById('fPay').value, receiver: document.getElementById('fReceiver').value.toUpperCase() })})
-        .then(() => { alert("JOB DELIVERED!"); location.reload(); });
+        .then(() => { alert("DISPATCH CONFIRMED!"); location.reload(); });
     }
 </script>
 </body>

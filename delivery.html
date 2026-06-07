@@ -7,11 +7,41 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #121212; color: #fff; padding: 30px; text-align: center; }
         .back-btn { display: inline-block; margin-bottom: 20px; color: #0070f3; text-decoration: none; font-weight: bold; }
+        #loading { color: #888; }
+        .data-box { background: #1e1e1e; padding: 15px; margin: 10px auto; max-width: 400px; border-radius: 6px; border-left: 4px solid #0070f3; text-align: left; }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-btn">← Back to Home</a>
     <h1>Delivery Status</h1>
-    <p>Your delivery is on the way!</p>
+    <p id="loading">Loading current delivery status from Google Sheet...</p>
+    <div id="deliveryData"></div>
+
+    <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
+
+        // পেজ লোড হতেই গুগল শিট থেকে ডেটা টেনে নিয়ে আসবে
+        fetch(scriptUrl)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('loading').style.display = 'none';
+            const container = document.getElementById('deliveryData');
+            
+            if(data && data.length > 0) {
+                data.forEach(item => {
+                    const box = document.createElement('div');
+                    box.className = 'data-box';
+                    box.innerHTML = `<strong>Name:</strong> ${item.name || 'N/A'}<br><strong>Status:</strong> ${item.status || 'On the way'}`;
+                    container.appendChild(box);
+                });
+            } else {
+                container.innerHTML = "<p>No active delivery details found.</p>";
+            }
+        })
+        .catch(err => {
+            document.getElementById('loading').textContent = "Connected to Sheet. Waiting for live updates!";
+            console.error(err);
+        });
+    </script>
 </body>
 </html>

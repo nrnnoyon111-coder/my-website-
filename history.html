@@ -2,16 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IND TECH | DELIVERY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #121212; color: #fff; padding: 30px; text-align: center; }
-        .back-btn { display: inline-block; margin-bottom: 20px; color: #0070f3; text-decoration: none; font-weight: bold; }
+        :root {
+            --bg: #020617; --panel: rgba(15, 23, 42, 0.7); --accent: #d4af37; 
+            --accent-glow: rgba(212, 175, 55, 0.3); --purple-glow: rgba(124, 58, 237, 0.2);
+            --text-main: #f8fafc; --text-dim: #94a3b8; --glass-border: rgba(255, 255, 255, 0.1); --success: #00f5a0;
+        }
+        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; }
+        body { margin: 0; background-color: var(--bg); background-image: radial-gradient(circle at 10% 10%, var(--purple-glow) 0%, transparent 40%), radial-gradient(circle at 90% 90%, var(--accent-glow) 0%, transparent 40%); color: var(--text-main); min-height: 100vh; }
+        header { padding: 25px 8%; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .brand { font-family: 'Syncopate', sans-serif; font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; }
+        .brand span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
+        .nav-tabs { display: flex; background: var(--panel); margin: 30px 8%; padding: 8px; border-radius: 24px; border: 1px solid var(--glass-border); gap: 10px; }
+        .tab { flex: 1; padding: 15px; text-align: center; border-radius: 18px; font-size: 10px; font-weight: 800; cursor: pointer; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; text-decoration: none; }
+        .tab.active { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent-glow); }
+        main { padding: 0 8% 100px; }
+        .card { background: var(--panel); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 35px; padding: 40px; margin-bottom: 30px; }
+        label { font-size: 10px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+        input, select { width: 100%; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-border); border-radius: 18px; padding: 18px; color: white; margin-bottom: 25px; }
+        .btn { width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 13px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; display: flex; justify-content: center; align-items: center; }
+        .btn-primary { background: var(--accent); color: #000; box-shadow: 0 10px 25px var(--accent-glow); }
+        .table-wrap { overflow-x: auto; border-radius: 25px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        th { padding: 22px; text-align: left; font-size: 11px; color: var(--accent); border-bottom: 1px solid var(--glass-border); text-transform: uppercase; }
+        td { padding: 20px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .status-badge { padding: 6px 14px; border-radius: 10px; font-size: 10px; font-weight: 800; border: 1px solid; text-transform: uppercase; }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 20px; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn">← Back to Home</a>
-    <h1>Order History</h1>
-    <p>No past orders found.</p>
+<header>
+    <div class="brand">IND TECH <span>ERP CORE</span></div>
+    <div style="width: 12px; height: 12px; background: var(--success); border-radius: 50%; box-shadow: 0 0 15px var(--success);"></div>
+</header>
+
+<div class="nav-tabs">
+    <a href="index.html" class="tab">Registration</a>
+    <a href="delivery.html" class="tab active">Delivery</a>
+    <a href="history.html" class="tab">Audit History</a>
+</div>
+
+<main>
+    <section id="sectionDash">
+        <div class="card">
+            <label>LIVE SEARCH PENDING JOBS</label>
+            <input type="text" id="dashSearch" onkeyup="searchTable('dashTable', 'dashSearch')" placeholder="FILTER BY CLIENT, SERIAL OR MODEL...">
+            <div class="table-wrap">
+                <table id="dashTable">
+                    <thead><tr><th>TAG ID</th><th>CLIENT</th><th>MODEL</th><th>SERIAL</th><th>STATUS</th><th>ACTION</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="deliveryModal" class="modal">
+    <div class="card" style="width: 100%; max-width: 450px;">
+        <h3 style="text-align: center; color: var(--accent); margin-top:0;">PROCESS DELIVERY</h3>
+        <input type="hidden" id="releaseRow">
+        <label>Payment Mode</label>
+        <select id="fPay" onchange="handleFreeService(this.value)"><option value="PAID">PAID</option><option value="DUE">DUE</option><option value="FREE SERVICE">FREE SERVICE</option></select>
+        <label>Total Final Bill</label><input type="number" id="fAmount" placeholder="0.00">
+        <label>Invoice Number</label><input type="text" id="fInvoice" placeholder="INV-000">
+        <label>Delivered To</label><input type="text" id="fReceiver" placeholder="NAME">
+        <button class="btn btn-primary" onclick="confirmRelease()">✅ COMPLETE & RELEASE</button>
+        <button class="btn" style="background:transparent; color:var(--text-dim);" onclick="closeModal()">CANCEL</button>
+    </div>
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
+
+    window.onload = () => { loadPending(); };
+
+    function searchTable(tableId, inputId) {
+        const filter = document.getElementById(inputId).value.toUpperCase();
+        const tr = document.getElementById(tableId).getElementsByTagName("tr");
+        for (let i = 1; i < tr.length; i++) {
+            let f = false; const td = tr[i].getElementsByTagName("td");
+            for (let j = 0; j < td.length; j++) if (td[j] && td[j].innerText.toUpperCase().indexOf(filter) > -1) f = true;
+            tr[i].style.display = f ? "" : "none";
+        }
+    }
+
+    function handleFreeService(val) {
+        const amtInput = document.getElementById('fAmount');
+        if(val === "FREE SERVICE") { amtInput.value = 0; amtInput.readOnly = true; amtInput.style.opacity = "0.3"; }
+        else { amtInput.readOnly = false; amtInput.style.opacity = "1"; }
+    }
+
+    function loadPending() {
+        const tbody = document.querySelector('#dashTable tbody');
+        tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>RETRIVING DATA...</td></tr>";
+        fetch(scriptURL + "?action=getPending").then(r => r.json()).then(data => {
+            let h = ""; 
+            data.forEach(i => { h += `<tr><td style="color:var(--accent)">${i.tag}</td><td style="font-weight:800">${i.client}</td><td>${i.model}</td><td>${i.serial}</td><td><span class="status-badge" style="color:var(--accent); border-color:var(--accent)">SERVICE</span></td><td><button class="btn btn-primary" style="padding:10px 18px; width:auto; font-size:9px;" onclick="openRelease('${i.row}')">DELIVER</button></td></tr>`; });
+            tbody.innerHTML = h || "<tr><td colspan='6' style='text-align:center;'>NO PENDING JOBS</td></tr>";
+        }).catch(() => { tbody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:red;'>CONNECTED. ERROR INTERFACING LIVE SHHET.</td></tr>"; });
+    }
+
+    function openRelease(row) { document.getElementById('releaseRow').value = row; document.getElementById('deliveryModal').style.display = "flex"; }
+    function closeModal() { document.getElementById('deliveryModal').style.display = "none"; }
+    function confirmRelease() {
+        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ action: "releaseJob", row: document.getElementById('releaseRow').value, amount: document.getElementById('fAmount').value, invoice: document.getElementById('fInvoice').value.toUpperCase(), payment: document.getElementById('fPay').value, receiver: document.getElementById('fReceiver').value.toUpperCase() })})
+        .then(() => { alert("JOB DELIVERED!"); location.reload(); });
+    }
+</script>
 </body>
 </html>

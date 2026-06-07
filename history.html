@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IND TECH | PENDING</title>
+    <title>IND TECH | HISTORY</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cabinet+Grotesk:wght@800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,8 +15,8 @@
             --text-main: #1d1d1f; 
             --text-dim: #86868b; 
             --input-bg: rgba(255, 255, 255, 0.7); 
-            --accent: #0071e3; 
-            --accent-glow: rgba(0, 113, 227, 0.2); 
+            --accent: #34c759; /* হিস্টোরির জন্য সাকসেস গ্রিন টোন */
+            --accent-glow: rgba(52, 199, 89, 0.2); 
             --shadow: rgba(0, 0, 0, 0.02);
             --blob-1: #dbdaea; --blob-2: #d2e3fc; --blob-3: #e2f4f2;
         }
@@ -29,8 +29,8 @@
             --text-main: #f2f2f7; 
             --text-dim: #aeaeae; 
             --input-bg: rgba(255, 255, 255, 0.05); 
-            --accent: #0a84ff; 
-            --accent-glow: rgba(10, 132, 255, 0.4); 
+            --accent: #30d158; 
+            --accent-glow: rgba(48, 209, 88, 0.4); 
             --shadow: rgba(0, 0, 0, 0.4);
             --blob-1: #bf5af2; --blob-2: #0a84ff; --blob-3: #ff9f0a;
         }
@@ -67,25 +67,36 @@
         .liquid-leader-card.active-glow { border-color: var(--accent); box-shadow: 0 20px 40px var(--glass-shadow), 0 0 25px var(--accent-glow), inset 0 1px 1px var(--glass-highlight); transform: scale(1.015); }
         
         .card-header-view { display: flex; justify-content: space-between; align-items: flex-start; }
-        .c-main { display: flex; flex-direction: column; width: 70%; }
+        .c-main { display: flex; flex-direction: column; width: 65%; }
         
         .c-name { font-family: 'Cabinet Grotesk', -apple-system, sans-serif; font-size: 18px; font-weight: 900; color: var(--text-main); letter-spacing: -0.2px; margin-bottom: 6px; text-transform: uppercase; line-height: 1.2; }
         .c-hardware-meta { font-size: 12px; color: var(--text-dim); font-weight: 500; margin-top: 2px; display: flex; gap: 4px; }
         .c-hardware-meta span { color: var(--text-main); font-weight: 600; }
         
-        .c-side { width: 30%; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-        .tag-lbl { font-size: 10px; font-weight: 700; color: var(--accent); background: var(--input-bg); padding: 3px 10px; border-radius: 99px; border: 1px solid var(--glass-border); }
-        .status-lbl { font-size: 9px; font-weight: 800; color: #34c759; text-transform: uppercase; letter-spacing: 0.5px; }
+        .c-side { width: 35%; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+        .tag-lbl { font-size: 10px; font-weight: 700; color: #fff; background: #34c759; padding: 3px 10px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.1); text-transform: uppercase; }
+        
+        /* ─── অ্যামাউন্ট প্রাইভেসি কন্টেইনার (ক্লিক করলে শো করবে) ─── */
+        .secure-amount-box { 
+            font-size: 13px; 
+            font-weight: 800; 
+            color: var(--text-main); 
+            background: var(--input-bg); 
+            padding: 4px 10px; 
+            border-radius: 8px; 
+            border: 1px solid var(--glass-border); 
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            user-select: none;
+        }
+        .secure-amount-box span.hidden-state { filter: blur(4px); opacity: 0.6; font-size: 11px; letter-spacing: 1px; }
 
         .collapsible-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0,0,0,0.01); border-radius: 12px; }
         .collapsible-detail.open { max-height: 200px; padding: 14px; margin-top: 14px; border: 1px solid var(--glass-border); }
         .detail-item { font-size: 12px; margin-bottom: 4px; color: var(--text-dim); }
         .detail-item strong { color: var(--text-main); }
-
-        .action-btn { width: 100%; background: var(--accent); color: #fff; padding: 12px; border: none; border-radius: 12px; font-weight: 700; font-size: 11px; text-transform: uppercase; margin-top: 8px; cursor: pointer; box-shadow: 0 4px 12px var(--accent-glow); }
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); display: none; justify-content: center; align-items: center; z-index: 200; padding: 20px; }
-        .modal-body { background: var(--bg); border-radius: 24px; padding: 22px; width: 100%; max-width: 380px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
-        select, .modal-body input { width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px; color: var(--text-main); margin-bottom: 12px; outline: none; }
     </style>
 </head>
 <body>
@@ -97,44 +108,31 @@
 </div>
 
 <header>
-    <div class="brand">IND TECH <span>CORE</span></div>
+    <div class="brand">IND TECH <span>LOGS</span></div>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌓 DARK MODE</button>
 </header>
 
 <div class="nav-tabs">
     <a href="index.html" class="tab">Register</a>
-    <a href="delivery.html" class="tab active">Delivery</a>
-    <a href="history.html" class="tab">History</a>
+    <a href="delivery.html" class="tab">Delivery</a>
+    <a href="history.html" class="tab active">History</a>
 </div>
 
 <main>
-    <input type="text" id="mSearch" onkeyup="filterCards()" class="search-input" placeholder="Search by name, tag, hardware...">
-    <div id="loading" style="text-align: center; font-size: 13px; color: var(--text-dim); margin-top: 15px;">Interfacing Database Log...</div>
+    <input type="text" id="mSearch" onkeyup="filterCards()" class="search-input" placeholder="Search archive by client, invoice, status...">
+    <div id="loading" style="text-align: center; font-size: 13px; color: var(--text-dim); margin-top: 15px;">Decoding Archive Logs...</div>
     <div id="cardsList"></div>
 </main>
-
-<div id="deliveryModal" class="modal">
-    <div class="modal-body">
-        <h3 style="text-align: center; color: var(--accent); margin-bottom:15px; font-size:15px; font-weight:700;">PROCESS DISPATCH</h3>
-        <input type="hidden" id="releaseRow">
-        <select id="fPay"><option value="PAID">PAID</option><option value="DUE">DUE</option><option value="FREE SERVICE">FREE SERVICE</option></select>
-        <input type="number" id="fAmount" placeholder="Total Financial Amount">
-        <input type="text" id="fInvoice" placeholder="Invoice Code">
-        <input type="text" id="fReceiver" placeholder="Handed Over To Name">
-        <button class="action-btn" onclick="confirmRelease()">Complete & Dispatch</button>
-        <button class="action-btn" style="background:transparent; color:var(--text-dim);" onclick="closeModal()">Cancel</button>
-    </div>
-</div>
 
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
     
     window.onload = () => {
         if(localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('themeBtn').innerText = "☀️ LIGHT MODE"; }
-        fetch(scriptURL + "?action=getPending").then(r => r.json()).then(data => {
+        fetch(scriptURL + "?action=getHistory").then(r => r.json()).then(data => {
             document.getElementById('loading').style.display = 'none';
             const list = document.getElementById('cardsList');
-            if(!data || data.length === 0){ list.innerHTML = "<p style='text-align:center; color:var(--text-dim);'>No pending jobs</p>"; return; }
+            if(!data || data.length === 0){ list.innerHTML = "<p style='text-align:center; color:var(--text-dim);'>Archive is empty</p>"; return; }
             data.forEach(i => {
                 const card = document.createElement('div'); card.className = 'liquid-leader-card';
                 card.setAttribute('onclick', 'toggleCard(this)');
@@ -143,22 +141,40 @@
                         <div class="c-main">
                             <span class="c-name">${i.client}</span>
                             <div class="c-hardware-meta">Board: <span>${i.model}</span></div>
-                            <div class="c-hardware-meta">S/N: <span>${i.serial || 'N/A'}</span></div>
+                            <div class="c-hardware-meta">Invoice: <span>${i.invoice || 'N/A'}</span></div>
                         </div>
                         <div class="c-side">
-                            <span class="tag-lbl">${i.tag}</span>
-                            <span class="status-lbl">SERVICE</span>
+                            <span class="tag-lbl">${i.payment || 'DISPATCHED'}</span>
+                            <div class="secure-amount-box" onclick="toggleAmountPrivacy(event, this, '${i.amount || '0'}')">
+                                👁️ <span class="hidden-state">•••• ৳</span>
+                            </div>
                         </div>
                     </div>
                     <div class="collapsible-detail">
-                        <div class="detail-item"><strong>Reported Fault:</strong> ${i.issue || 'N/A'}</div>
+                        <div class="detail-item"><strong>Fault Fixed:</strong> ${i.issue || 'N/A'}</div>
+                        <div class="detail-item"><strong>Receiver Person:</strong> ${i.receiver || 'N/A'}</div>
                         <div class="detail-item"><strong>Initial Note:</strong> ${i.remark || 'None'}</div>
-                        <button class="action-btn" onclick="event.stopPropagation(); openRelease('${i.row}')">MARK DELIVERED</button>
                     </div>`;
                 list.appendChild(card);
             });
         });
     };
+
+    // টাকার অ্যামাউন্ট ক্লিক করলে শো/হাইড করার কাস্টম জাভাস্ক্রিপ্ট ফাংশন
+    function toggleAmountPrivacy(event, element, realAmount) {
+        event.stopPropagation(); // কার্ডের কোলাপ্স ক্লিক ইভেন্ট লক করার জন্য
+        const textSpan = element.querySelector('span');
+        
+        if (textSpan.classList.contains('hidden-state')) {
+            textSpan.innerText = realAmount + " ৳";
+            textSpan.classList.remove('hidden-state');
+            element.style.borderColor = "var(--accent)";
+        } else {
+            textSpan.innerText = "•••• ৳";
+            textSpan.classList.add('hidden-state');
+            element.style.borderColor = "var(--glass-border)";
+        }
+    }
 
     function toggleTheme() {
         if(document.documentElement.getAttribute('data-theme') === 'dark') {
@@ -179,12 +195,6 @@
         document.querySelectorAll('.liquid-leader-card').forEach(c => {
             c.style.display = c.innerText.toUpperCase().indexOf(f) > -1 ? "" : "none";
         });
-    }
-    function openRelease(row) { document.getElementById('releaseRow').value = row; document.getElementById('deliveryModal').style.display = "flex"; }
-    function closeModal() { document.getElementById('deliveryModal').style.display = "none"; }
-    function confirmRelease() {
-        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ action: "releaseJob", row: document.getElementById('releaseRow').value, amount: document.getElementById('fAmount').value, invoice: document.getElementById('fInvoice').value.toUpperCase(), payment: document.getElementById('fPay').value, receiver: document.getElementById('fReceiver').value.toUpperCase() })})
-        .then(() => { alert("DISPATCH CONFIRMED!"); location.reload(); });
     }
 </script>
 </body>

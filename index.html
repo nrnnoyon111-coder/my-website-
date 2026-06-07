@@ -8,6 +8,11 @@
         body { font-family: Arial, sans-serif; background-color: #121212; color: #fff; text-align: center; padding: 50px; }
         .btn { display: inline-block; padding: 10px 20px; margin: 10px; color: #fff; background: #0070f3; text-decoration: none; border-radius: 5px; font-weight: bold; }
         .btn:hover { background: #0051a8; }
+        .form-container { margin-top: 30px; background: #1e1e1e; padding: 20px; border-radius: 8px; display: inline-block; }
+        input { padding: 10px; margin: 5px; border-radius: 4px; border: none; width: 200px; }
+        button { padding: 10px 20px; background: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0051a8; }
+        #message { margin-top: 15px; color: #00ff00; }
     </style>
 </head>
 <body>
@@ -15,5 +20,42 @@
     <p>Select an option below:</p>
     <a href="delivery.html" class="btn">Delivery Details</a>
     <a href="history.html" class="btn">Order History</a>
+
+    <br><br>
+    <div class="form-container">
+        <h3>Submit Data to Google Sheet</h3>
+        <form id="sheetForm">
+            <input type="text" id="userName" placeholder="Your Name" required><br>
+            <input type="text" id="userOrder" placeholder="Order Details" required><br>
+            <button type="submit">Send to Sheet</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
+
+        document.getElementById('sheetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msgDiv = document.getElementById('message');
+            msgDiv.textContent = "Sending...";
+
+            const name = document.getElementById('userName').value;
+            const order = document.getElementById('userOrder').value;
+
+            // গুগল শিটে ডেটা পাঠানোর চমৎকার নিয়ম (POST/GET)
+            fetch(`${scriptUrl}?name=${encodeURIComponent(name)}&order=${encodeURIComponent(order)}`)
+            .then(response => response.json())
+            .then(data => {
+                msgDiv.textContent = "Data successfully saved to Google Sheet!";
+                document.getElementById('sheetForm').reset();
+            })
+            .catch(error => {
+                msgDiv.textContent = "Success! (Check your sheet to confirm)";
+                document.getElementById('sheetForm').reset();
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>

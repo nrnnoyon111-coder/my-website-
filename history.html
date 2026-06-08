@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IND TECH | HISTORY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cabinet+Grotesk:wght@800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <title>IND TECH | AUDIT HISTORY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cabinet+Grotesk:wght@800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* --- Themes --- */
         :root {
             --bg: #f5f5f7; 
             --glass-bg: rgba(255, 255, 255, 0.22); 
@@ -15,10 +16,15 @@
             --text-main: #1d1d1f; 
             --text-dim: #86868b; 
             --input-bg: rgba(255, 255, 255, 0.7); 
-            --accent: #34c759; 
-            --accent-glow: rgba(52, 199, 89, 0.2); 
-            --shadow: rgba(0, 0, 0, 0.02);
+            --accent: #0071e3; 
+            --accent-glow: rgba(0, 113, 227, 0.2); 
             --blob-1: #dbdaea; --blob-2: #d2e3fc; --blob-3: #e2f4f2;
+            --success: #34c759;
+            --success-glow: rgba(52, 199, 89, 0.15);
+            --danger: #ff3b30;
+            --danger-glow: rgba(255, 59, 48, 0.15);
+            --warning: #ff9f0a;
+            --warning-glow: rgba(255, 159, 10, 0.15);
         }
         [data-theme="dark"] {
             --bg: #000000; 
@@ -29,14 +35,21 @@
             --text-main: #f2f2f7; 
             --text-dim: #aeaeae; 
             --input-bg: rgba(255, 255, 255, 0.05); 
-            --accent: #30d158; 
-            --accent-glow: rgba(48, 209, 88, 0.4); 
-            --shadow: rgba(0, 0, 0, 0.4);
+            --accent: #0a84ff; 
+            --accent-glow: rgba(10, 132, 255, 0.4); 
+            --success: #32d74b;
+            --success-glow: rgba(50, 215, 75, 0.2);
+            --danger: #ff453a;
+            --danger-glow: rgba(255, 69, 58, 0.2);
+            --warning: #ff9f0a;
+            --warning-glow: rgba(255, 159, 10, 0.2);
             --blob-1: #bf5af2; --blob-2: #0a84ff; --blob-3: #ff9f0a;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; transition: background 0.5s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; text-transform: uppercase; }
         body { background: var(--bg); color: var(--text-main); min-height: 100vh; padding-bottom: 40px; -webkit-font-smoothing: antialiased; position: relative; overflow-x: hidden; }
         
+        /* --- Ambient Background --- */
         .ambient-container { position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1; pointer-events: none; filter: blur(70px); opacity: 0.85; }
         .blob { position: absolute; width: 320px; height: 320px; border-radius: 50%; mix-blend-mode: multiply; animation: orbit 25s infinite linear; }
         [data-theme="dark"] .ambient-container { opacity: 0.35; filter: blur(110px); }
@@ -51,52 +64,84 @@
             100% { transform: translate(0px, 0px) scale(1) rotate(360deg); }
         }
 
-        header { background: var(--glass-bg); backdrop-filter: blur(50px) saturate(200%); -webkit-backdrop-filter: blur(50px) saturate(200%); padding: 18px 5%; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px var(--glass-shadow), inset 0 1px 1px var(--glass-highlight); }
-        .brand { font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; }
+        /* --- Header & Tabs --- */
+        header { background: var(--glass-bg); backdrop-filter: blur(50px); padding: 18px 5%; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px var(--glass-shadow); }
+        .brand { font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; font-weight: 700;}
         .brand span { color: var(--accent); }
-        .theme-toggle { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 14px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 1px var(--glass-highlight); }
+        .theme-toggle { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 14px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; }
         
         .nav-tabs { display: flex; background: var(--glass-bg); margin: 20px 4%; padding: 5px; border-radius: 99px; border: 1px solid var(--glass-border); gap: 5px; box-shadow: 0 10px 30px var(--glass-shadow); }
-        .tab { flex: 1; padding: 12px 5px; text-align: center; border-radius: 99px; font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; text-decoration: none; }
-        .tab.active { background: var(--input-bg); color: var(--accent); border: 1px solid var(--glass-border); }
+        .tab { flex: 1; padding: 12px 5px; text-align: center; border-radius: 99px; font-size: 11px; font-weight: 800; color: var(--text-dim); text-decoration: none; letter-spacing: 1px; }
+        .tab.active { background: var(--input-bg); color: var(--accent); border: 1px solid var(--glass-border); box-shadow: 0 0 10px var(--accent-glow); }
         
-        main { padding: 0 4%; position: relative; z-index: 1; }
-        .search-input { width: 100%; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 14px; padding: 15px; color: var(--text-main); font-size: 14px; margin-bottom: 15px; outline: none; }
+        main { padding: 0 4%; position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
         
-        .liquid-leader-card { background: var(--glass-bg); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--glass-border); border-radius: 20px; padding: 18px; margin-bottom: 12px; box-shadow: 0 15px 35px var(--glass-shadow), inset 0 1px 1px var(--glass-highlight); cursor: pointer; position: relative; overflow: hidden; transform: scale(1); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s, box-shadow 0.4s; }
-        .liquid-leader-card.active-glow { border-color: var(--accent); box-shadow: 0 20px 40px var(--glass-shadow), 0 0 25px var(--accent-glow), inset 0 1px 1px var(--glass-highlight); transform: scale(1.015); }
+        /* --- Stats Panels (Click to reveal) --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 5px; cursor: pointer; }
+        .stat-card { background: var(--glass-bg); backdrop-filter: blur(40px); border: 1px solid var(--glass-border); padding: 15px; border-radius: 20px; text-align: center; box-shadow: 0 10px 20px var(--glass-shadow); transition: transform 0.2s; }
+        .stat-card:hover { transform: translateY(-2px); }
+        .stat-val { font-size: 18px; font-family: 'Cabinet Grotesk', sans-serif; font-weight: 900; display: block; margin-bottom: 2px; }
+        .stat-label { font-size: 9px; color: var(--text-dim); font-weight: 800; letter-spacing: 0.5px; }
+        .stats-hint { text-align: center; font-size: 9px; color: var(--text-dim); margin-bottom: 20px; font-weight: 700; letter-spacing: 1px; }
+
+        /* --- Quick Status Filters --- */
+        .filter-panel { display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; }
+        .filter-panel::-webkit-scrollbar { display: none; }
+        .filter-btn { padding: 12px 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 99px; color: var(--text-dim); font-size: 10px; font-weight: 800; cursor: pointer; flex-shrink: 0; box-shadow: 0 4px 10px var(--glass-shadow); letter-spacing: 1px; }
+        .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 4px 15px var(--accent-glow); }
+
+        /* --- Date Filter Panel (Hidden by Default) --- */
+        .date-toggle-btn { background: var(--glass-bg); border: 1px dashed var(--glass-border); border-radius: 12px; padding: 10px; width: 100%; color: var(--text-dim); font-size: 10px; font-weight: 800; cursor: pointer; margin-bottom: 15px; }
+        .date-filter-box { display: none; flex-wrap: wrap; gap: 10px; align-items: flex-end; background: var(--glass-bg); backdrop-filter: blur(40px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 15px; margin-bottom: 15px; box-shadow: 0 10px 20px var(--glass-shadow); animation: fadeIn 0.3s ease; }
+        .date-filter-box.active { display: flex; }
+        .date-filter-box > div { flex: 1; min-width: 120px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        label { font-size: 9px; font-weight: 800; color: var(--text-dim); margin-bottom: 6px; display: block; margin-left: 4px; }
+        input[type="date"], .search-input { width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px; color: var(--text-main); font-size: 12px; font-weight: 600; outline: none; }
+        .search-input { margin-bottom: 15px; padding: 15px; font-size: 14px; border-radius: 16px; box-shadow: 0 10px 20px var(--glass-shadow); }
+        input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+
+        /* --- Liquid Cards --- */
+        .liquid-card { background: var(--glass-bg); backdrop-filter: blur(40px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 18px; margin-bottom: 12px; box-shadow: 0 10px 30px var(--glass-shadow); cursor: pointer; position: relative; overflow: hidden; transform: scale(1); transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+        .liquid-card.active-glow { border-color: var(--accent); box-shadow: 0 15px 40px var(--glass-shadow), 0 0 25px var(--accent-glow); transform: scale(1.015); }
         
-        .card-header-view { display: flex; justify-content: space-between; align-items: flex-start; }
+        .card-header-view { display: flex; justify-content: space-between; align-items: center; }
         .c-main { display: flex; flex-direction: column; width: 65%; }
         
-        .c-name { font-family: 'Cabinet Grotesk', -apple-system, sans-serif; font-size: 18px; font-weight: 900; color: var(--text-main); letter-spacing: -0.2px; margin-bottom: 6px; text-transform: uppercase; line-height: 1.2; }
-        .c-hardware-meta { font-size: 12px; color: var(--text-dim); font-weight: 500; margin-top: 2px; display: flex; gap: 4px; }
-        .c-hardware-meta span { color: var(--text-main); font-weight: 600; }
+        .c-name { font-family: 'Cabinet Grotesk', sans-serif; font-size: 18px; font-weight: 900; color: var(--text-main); letter-spacing: -0.2px; margin-bottom: 6px; line-height: 1.2; word-break: break-word; }
+        .c-hardware-meta { font-size: 11px; color: var(--text-dim); font-weight: 700; display: flex; gap: 8px; flex-wrap: wrap; letter-spacing: 0.5px;}
+        .c-hardware-meta span { color: var(--text-main); font-weight: 800; background: var(--input-bg); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--glass-border); }
         
-        .c-side { width: 35%; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-        .tag-lbl { font-size: 10px; font-weight: 700; color: #fff; background: #34c759; padding: 3px 10px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.1); text-transform: uppercase; }
+        .c-side { width: 35%; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+        .tag-lbl { font-size: 9px; font-weight: 800; color: var(--text-dim); letter-spacing: 1px; }
         
-        /* প্রাইভেসি এমাউন্ট কন্টেইনার */
-        .secure-amount-box { 
-            font-size: 13px; 
-            font-weight: 800; 
-            color: var(--text-main); 
-            background: var(--input-bg); 
-            padding: 4px 10px; 
-            border-radius: 8px; 
-            border: 1px solid var(--glass-border); 
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            user-select: none;
-        }
-        .secure-amount-box span.hidden-state { filter: blur(4px); opacity: 0.6; font-size: 11px; letter-spacing: 1px; }
+        /* New Badge showing Amount directly */
+        .status-badge { padding: 6px 14px; border-radius: 99px; font-size: 10px; font-family: 'Cabinet Grotesk', sans-serif; font-weight: 900; letter-spacing: 1px; }
 
-        .collapsible-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0,0,0,0.01); border-radius: 12px; }
-        .collapsible-detail.open { max-height: 200px; padding: 14px; margin-top: 14px; border: 1px solid var(--glass-border); }
-        .detail-item { font-size: 12px; margin-bottom: 4px; color: var(--text-dim); }
-        .detail-item strong { color: var(--text-main); }
+        /* --- Expanded Details --- */
+        .collapsible-detail { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0,0,0,0.02); border-radius: 12px; }
+        [data-theme="dark"] .collapsible-detail { background: rgba(255,255,255,0.02); }
+        .collapsible-detail.open { max-height: 450px; padding: 15px; margin-top: 15px; border: 1px solid var(--glass-border); }
+        
+        .detail-item { font-size: 10px; margin-bottom: 8px; color: var(--text-dim); font-weight: 700; display: flex; justify-content: space-between; border-bottom: 1px dashed var(--glass-border); padding-bottom: 5px; letter-spacing: 0.5px;}
+        .detail-item strong { color: var(--text-main); font-weight: 900; text-align: right; max-width: 60%; word-break: break-word;}
+
+        /* --- Premium Amount Box --- */
+        .premium-amount-box { margin-top: 15px; padding: 18px; border-radius: 16px; border: 2px dashed; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 10px; }
+        .amt-label { font-size: 9px; font-weight: 900; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 5px; }
+        .amt-value { font-family: 'Cabinet Grotesk', sans-serif; font-size: 28px; font-weight: 900; letter-spacing: 1px; text-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        /* --- Buttons --- */
+        .action-btn { width: 100%; background: var(--accent); color: #fff; padding: 14px; border: none; border-radius: 12px; font-weight: 900; font-size: 11px; letter-spacing: 1px; margin-top: 5px; cursor: pointer; box-shadow: 0 4px 15px var(--accent-glow); }
+        .collect-btn { background: var(--danger); box-shadow: 0 4px 15px var(--danger-glow); }
+
+        /* --- Modal --- */
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(15px); display: none; justify-content: center; align-items: center; z-index: 200; padding: 20px; }
+        .modal-body { background: var(--bg); border-radius: 24px; padding: 25px; width: 100%; max-width: 380px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .modal-body h3 { text-align: center; color: var(--text-main); font-weight: 900; margin-bottom: 10px; font-family: 'Cabinet Grotesk', sans-serif; letter-spacing: 1px;}
+        .modal-body input { width: 100%; background: var(--input-bg); border: 2px dashed var(--glass-border); border-radius: 14px; padding: 20px; color: var(--danger); font-size: 26px; font-weight: 900; font-family: 'Cabinet Grotesk', sans-serif; text-align: center; margin-bottom: 15px; outline: none; }
+        .modal-body input:focus { border-color: var(--danger); background: var(--danger-glow); }
     </style>
 </head>
 <body>
@@ -108,74 +153,78 @@
 </div>
 
 <header>
-    <div class="brand">IND TECH <span>LOGS</span></div>
+    <div class="brand">IND TECH <span>CORE</span></div>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌓 DARK MODE</button>
 </header>
 
 <div class="nav-tabs">
-    <a href="index.html" class="tab">Register</a>
-    <a href="delivery.html" class="tab">Delivery</a>
-    <a href="history.html" class="tab active">History</a>
+    <a href="index.html" class="tab">REGISTER</a>
+    <a href="delivery.html" class="tab">DELIVERY</a>
+    <a href="history.html" class="tab active">HISTORY</a>
 </div>
 
 <main>
-    <input type="text" id="mSearch" onkeyup="filterCards()" class="search-input" placeholder="Search archive by client, invoice, status...">
-    <div id="loading" style="text-align: center; font-size: 13px; color: var(--text-dim); margin-top: 15px;">Decoding Archive Logs...</div>
+    <div class="stats-grid" onclick="toggleStats()" title="Click to show/hide amounts">
+        <div class="stat-card" style="border-bottom: 2px solid var(--success);">
+            <span class="stat-val" id="totalCash" style="color: var(--success); text-shadow: 0 0 10px var(--success-glow);">৳ ***</span>
+            <span class="stat-label">TOTAL PAID</span>
+        </div>
+        <div class="stat-card" style="border-bottom: 2px solid var(--danger);">
+            <span class="stat-val" id="totalDue" style="color: var(--danger); text-shadow: 0 0 10px var(--danger-glow);">৳ ***</span>
+            <span class="stat-label">MARKET DUE</span>
+        </div>
+        <div class="stat-card" style="border-bottom: 2px solid var(--accent);">
+            <span class="stat-val" id="totalFree" style="color: var(--accent); text-shadow: 0 0 10px var(--accent-glow);">***</span>
+            <span class="stat-label">FREE JOBS</span>
+        </div>
+    </div>
+    <div class="stats-hint">👁️ CLICK ON BOXES TO SHOW OR HIDE AMOUNTS</div>
+
+    <div class="filter-panel">
+        <button class="filter-btn active" onclick="applyFilter('ALL', this)">ALL LOGS</button>
+        <button class="filter-btn" onclick="applyFilter('PAID', this)">PAID</button>
+        <button class="filter-btn" onclick="applyFilter('DUE', this)">DUE</button>
+        <button class="filter-btn" onclick="applyFilter('FREE', this)">FREE</button>
+        <button class="filter-btn" onclick="applyFilter('SERVICE', this)">PENDING</button>
+    </div>
+
+    <button class="date-toggle-btn" onclick="toggleDatePanel()">📅 TOGGLE DATE FILTER</button>
+    <div class="date-filter-box" id="datePanel">
+        <div><label>START DATE</label><input type="date" id="dateFrom"></div>
+        <div><label>END DATE</label><input type="date" id="dateTo"></div>
+        <button class="action-btn" style="height: 40px; margin-top: 0;" onclick="applyDateFilter()">APPLY</button>
+    </div>
+
+    <input type="text" id="mSearch" onkeyup="triggerFilter()" class="search-input" placeholder="SEARCH BY NAME, TAG, HARDWARE...">
+    <div id="loading" style="text-align: center; font-size: 11px; color: var(--text-dim); margin-top: 10px; font-weight: 800; letter-spacing: 2px;">SYNCING DATABASE LOG...</div>
+    
     <div id="cardsList"></div>
 </main>
 
+<div id="dueModal" class="modal">
+    <div class="modal-body">
+        <h3>COLLECT PAYMENT</h3>
+        <p id="dueLabel" style="text-align:center; font-size:10px; color:var(--text-dim); margin-bottom: 15px; font-weight: 800; letter-spacing: 1px;"></p>
+        <input type="hidden" id="dueRow">
+        <input type="number" id="dueAmount" readonly>
+        <button class="action-btn" style="background: var(--success); box-shadow: 0 4px 15px var(--success-glow);" onclick="confirmDueCollection()">MARK AS FULLY PAID</button>
+        <button class="action-btn" style="background:transparent; color:var(--text-dim); border: 1px dashed var(--glass-border); box-shadow:none;" onclick="closeModal()">CANCEL</button>
+    </div>
+</div>
+
 <script>
-    // ওরিজিনাল স্ক্রিপ্ট URL যা আপনার ডাটাবেজের সাথে কানেক্টেড ছিল
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
     
+    // Hidden Stats Global Variables
+    let statsVisible = false;
+    let currentCash = 0;
+    let currentDue = 0;
+    let currentFree = 0;
+
     window.onload = () => {
         if(localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('themeBtn').innerText = "☀️ LIGHT MODE"; }
-        
-        // ওরিজিনাল getHistory অ্যাকশন মেথড কলিং রিস্টোর করা হলো
-        fetch(scriptURL + "?action=getHistory").then(r => r.json()).then(data => {
-            document.getElementById('loading').style.display = 'none';
-            const list = document.getElementById('cardsList');
-            if(!data || data.length === 0){ list.innerHTML = "<p style='text-align:center; color:var(--text-dim);'>Archive is empty</p>"; return; }
-            data.forEach(i => {
-                const card = document.createElement('div'); card.className = 'liquid-leader-card';
-                card.setAttribute('onclick', 'toggleCard(this)');
-                card.innerHTML = `
-                    <div class="card-header-view">
-                        <div class="c-main">
-                            <span class="c-name">${i.client}</span>
-                            <div class="c-hardware-meta">Board: <span>${i.model}</span></div>
-                            <div class="c-hardware-meta">Invoice: <span>${i.invoice || 'N/A'}</span></div>
-                        </div>
-                        <div class="c-side">
-                            <span class="tag-lbl">${i.payment || 'DISPATCHED'}</span>
-                            <div class="secure-amount-box" onclick="toggleAmountPrivacy(event, this, '${i.amount || '0'}')">
-                                👁️ <span class="hidden-state">•••• ৳</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collapsible-detail">
-                        <div class="detail-item"><strong>Fault Fixed:</strong> ${i.issue || 'N/A'}</div>
-                        <div class="detail-item"><strong>Receiver Person:</strong> ${i.receiver || 'N/A'}</div>
-                        <div class="detail-item"><strong>Initial Note:</strong> ${i.remark || 'None'}</div>
-                    </div>`;
-                list.appendChild(card);
-            });
-        });
+        loadHistory();
     };
-
-    function toggleAmountPrivacy(event, element, realAmount) {
-        event.stopPropagation();
-        const textSpan = element.querySelector('span');
-        if (textSpan.classList.contains('hidden-state')) {
-            textSpan.innerText = realAmount + " ৳";
-            textSpan.classList.remove('hidden-state');
-            element.style.borderColor = "var(--accent)";
-        } else {
-            textSpan.innerText = "•••• ৳";
-            textSpan.classList.add('hidden-state');
-            element.style.borderColor = "var(--glass-border)";
-        }
-    }
 
     function toggleTheme() {
         if(document.documentElement.getAttribute('data-theme') === 'dark') {
@@ -185,17 +234,185 @@
         }
     }
 
+    function toggleDatePanel() {
+        const panel = document.getElementById('datePanel');
+        panel.classList.toggle('active');
+    }
+
+    function toggleStats() {
+        statsVisible = !statsVisible;
+        renderStats();
+    }
+
+    function renderStats() {
+        document.getElementById('totalCash').innerText = statsVisible ? "৳ " + currentCash.toLocaleString() : "৳ ***";
+        document.getElementById('totalDue').innerText = statsVisible ? "৳ " + currentDue.toLocaleString() : "৳ ***";
+        document.getElementById('totalFree').innerText = statsVisible ? currentFree : "***";
+    }
+
     function toggleCard(el) { 
-        document.querySelectorAll('.liquid-leader-card').forEach(c => { if(c !== el) c.classList.remove('active-glow'); });
+        document.querySelectorAll('.liquid-card').forEach(c => { if(c !== el) { c.classList.remove('active-glow'); c.querySelector('.collapsible-detail').classList.remove('open'); } });
         el.classList.toggle('active-glow');
         el.querySelector('.collapsible-detail').classList.toggle('open'); 
     }
 
-    function filterCards() {
-        const f = document.getElementById('mSearch').value.toUpperCase();
-        document.querySelectorAll('.liquid-leader-card').forEach(c => {
-            c.style.display = c.innerText.toUpperCase().indexOf(f) > -1 ? "" : "none";
+    function loadHistory() {
+        fetch(scriptURL + "?action=getAllRecordsFull").then(r => r.json()).then(data => {
+            document.getElementById('loading').style.display = 'none';
+            const list = document.getElementById('cardsList');
+
+            if(!data || data.length === 0){ list.innerHTML = "<p style='text-align:center; color:var(--text-dim); font-weight:800;'>NO RECORDS FOUND</p>"; return; }
+            
+            let htmlContent = "";
+            
+            data.forEach(i => {
+                let bill = parseFloat(i.bill) || 0;
+                let sCls = "var(--success)", badgeText = "৳ " + bill, sGlow = "var(--success-glow)", sType = "PAID";
+                let actionBtn = "";
+
+                // Replacing Status with Direct Amount logic
+                if(i.status === "Pending") { 
+                    sCls = "var(--warning)"; badgeText = "SERVICE"; sGlow = "var(--warning-glow)"; sType = "SERVICE";
+                }
+                else if(bill === 0) { 
+                    sCls = "var(--accent)"; badgeText = "FREE"; sGlow = "var(--accent-glow)"; sType = "FREE";
+                }
+                else if(i.payment === "DUE") { 
+                    sCls = "var(--danger)"; badgeText = "৳ " + bill + " DUE"; sGlow = "var(--danger-glow)"; sType = "DUE";
+                    actionBtn = `<button class="action-btn collect-btn" onclick="event.stopPropagation(); openDueCollect('${i.row}', '${bill}', '${i.client}')">COLLECT DUE (৳${bill})</button>`;
+                }
+
+                htmlContent += `
+                    <div class="liquid-card" data-bill="${bill}" data-type="${sType}" onclick="toggleCard(this)">
+                        
+                        <div class="card-header-view">
+                            <div class="c-main">
+                                <span class="c-name">${i.client}</span>
+                                <div class="c-hardware-meta">
+                                    <span>${i.model}</span>
+                                    <span>S/N: ${i.serial || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="c-side">
+                                <span class="tag-lbl">TAG: ${i.tag}</span>
+                                <span class="status-badge" style="color:${sCls}; background:${sGlow}; border: 1px solid ${sCls}; text-shadow: 0 0 10px ${sGlow};">${badgeText}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collapsible-detail">
+                            <div class="detail-item">ENTRY DATE: <strong>${i.date}</strong></div>
+                            <div class="detail-item">DISPATCH TO: <strong>${i.receiver || 'PENDING'}</strong></div>
+                            <div class="detail-item">REPORTED ISSUE: <strong>${i.issue || 'N/A'}</strong></div>
+                            <div class="detail-item">REMARK / NOTE: <strong style="color:var(--accent);">${i.remark || 'N/A'}</strong></div>
+                            <div class="detail-item">INVOICE CODE: <strong>${i.invoice || 'N/A'}</strong></div>
+                            
+                            <div class="premium-amount-box" style="border-color: ${sCls}; background: ${sGlow};">
+                                <span class="amt-label">FINAL SETTLEMENT</span>
+                                <span class="amt-value" style="color: ${sCls};">${bill > 0 ? '৳ ' + bill : 'FREE SERVICE'}</span>
+                            </div>
+                            
+                            ${actionBtn}
+                        </div>
+                    </div>`;
+            });
+            
+            list.innerHTML = htmlContent;
+            triggerFilter(); // Calculate initial stats
+        }).catch(e => {
+            document.getElementById('loading').innerText = "DATABASE CONNECTION FAILED!";
+            document.getElementById('loading').style.color = "var(--danger)";
         });
+    }
+
+    // --- Smart Filtering System ---
+    function applyFilter(type, btnEl) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if(btnEl) btnEl.classList.add('active');
+        triggerFilter();
+    }
+
+    function triggerFilter() {
+        const fText = document.getElementById('mSearch').value.toUpperCase();
+        const activeBtn = document.querySelector('.filter-btn.active');
+        const fType = activeBtn ? activeBtn.innerText : 'ALL LOGS';
+        
+        currentCash = 0; currentDue = 0; currentFree = 0;
+
+        document.querySelectorAll('.liquid-card').forEach(card => {
+            const cardText = card.innerText.toUpperCase();
+            const cardType = card.getAttribute('data-type'); 
+            
+            const matchSearch = cardText.indexOf(fText) > -1;
+            const matchType = (fType === 'ALL LOGS') || (fType === cardType) || (fType === 'PENDING' && cardType === 'SERVICE');
+
+            if (matchSearch && matchType) {
+                card.style.display = "block";
+                const amt = parseFloat(card.getAttribute('data-bill')) || 0;
+                if(cardType === "PAID") currentCash += amt;
+                else if(cardType === "DUE") currentDue += amt;
+                else if(cardType === "FREE") currentFree++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        renderStats(); // Updates UI based on hidden/show state
+    }
+
+    // --- Date Filter System ---
+    function applyDateFilter() {
+        const from = document.getElementById('dateFrom').value;
+        const to = document.getElementById('dateTo').value;
+        if(!from || !to) return alert("Select start and end dates.");
+        
+        const start = new Date(from); start.setHours(0,0,0,0);
+        const end = new Date(to); end.setHours(23,59,59,999);
+        
+        currentCash = 0; currentDue = 0; currentFree = 0;
+        
+        // Reset top filter buttons when date filter is used
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.filter-btn:first-child').classList.add('active');
+        document.getElementById('mSearch').value = ""; // Clear search
+
+        document.querySelectorAll('.liquid-card').forEach(item => {
+            const dateStr = item.querySelector('.detail-item:first-child strong').innerText; // e.g. 15/06/2026
+            const dateParts = dateStr.split('/');
+            const rowDate = new Date(dateParts[2], dateParts[1]-1, dateParts[0]); 
+            
+            if(rowDate >= start && rowDate <= end) {
+                item.style.display = "block";
+                const cardType = item.getAttribute('data-type');
+                const amt = parseFloat(item.getAttribute('data-bill')) || 0;
+                
+                if(cardType === "PAID") currentCash += amt;
+                else if(cardType === "DUE") currentDue += amt;
+                else if(cardType === "FREE") currentFree++;
+            } else { 
+                item.style.display = "none"; 
+            }
+        });
+        
+        renderStats();
+    }
+
+    // --- Modal Actions ---
+    function openDueCollect(row, amt, name) { 
+        document.getElementById('dueRow').value = row; 
+        document.getElementById('dueAmount').value = amt; 
+        document.getElementById('dueLabel').innerText = "CLIENT: " + name;
+        document.getElementById('dueModal').style.display = "flex"; 
+    }
+    
+    function closeModal() { document.getElementById('dueModal').style.display = "none"; }
+    
+    function confirmDueCollection() {
+        const btn = document.querySelector('#dueModal .action-btn');
+        btn.innerText = "UPDATING DATABASE..."; btn.disabled = true;
+
+        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ action: "updatePayment", row: document.getElementById('dueRow').value })})
+        .then(() => { alert("DUE CLEARED SUCCESSFULLY!"); location.reload(); })
+        .catch(() => { alert("ERROR UPDATING PAYMENT."); btn.innerText = "MARK AS FULLY PAID"; btn.disabled = false; });
     }
 </script>
 </body>

@@ -1,295 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>IND TECH | REGISTRATION</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cabinet+Grotesk:wght@800;900&family=Syncopate:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* --- Themes from Delivery Page --- */
         :root {
-            --bg: #020617;
-            --panel: rgba(15, 23, 42, 0.7);
-            --accent: #d4af37; /* Metallic Gold */
-            --accent-glow: rgba(212, 175, 55, 0.3);
-            --purple-glow: rgba(124, 58, 237, 0.2);
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --success: #00f5a0;
-            --danger: #ff4b2b;
+            --bg: #f5f5f7; 
+            --glass-bg: rgba(255, 255, 255, 0.22); 
+            --glass-border: rgba(255, 255, 255, 0.5); 
+            --glass-shadow: rgba(0, 0, 0, 0.05); 
+            --glass-highlight: rgba(255, 255, 255, 0.9); 
+            --text-main: #1d1d1f; 
+            --text-dim: #86868b; 
+            --input-bg: rgba(255, 255, 255, 0.7); 
+            --accent: #0071e3; 
+            --accent-glow: rgba(0, 113, 227, 0.2); 
+            --shadow: rgba(0, 0, 0, 0.02);
+            --blob-1: #dbdaea; --blob-2: #d2e3fc; --blob-3: #e2f4f2;
+        }
+        [data-theme="dark"] {
+            --bg: #000000; 
+            --glass-bg: rgba(30, 30, 35, 0.35); 
+            --glass-border: rgba(255, 255, 255, 0.15); 
+            --glass-shadow: rgba(0, 0, 0, 0.6); 
+            --glass-highlight: rgba(255, 255, 255, 0.25); 
+            --text-main: #f2f2f7; 
+            --text-dim: #aeaeae; 
+            --input-bg: rgba(255, 255, 255, 0.05); 
+            --accent: #0a84ff; 
+            --accent-glow: rgba(10, 132, 255, 0.4); 
+            --shadow: rgba(0, 0, 0, 0.4);
+            --blob-1: #bf5af2; --blob-2: #0a84ff; --blob-3: #ff9f0a;
         }
 
-        /* --- Global Smoothness --- */
-        * { 
-            box-sizing: border-box; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
-        }
-
-        body {
-            margin: 0;
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 10% 10%, var(--purple-glow) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, var(--accent-glow) 0%, transparent 40%);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
-
-        /* --- Header & Brand --- */
-        header {
-            padding: 25px 8%;
-            background: rgba(2, 6, 23, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .brand {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .brand span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
-
-        /* --- High-End Nav Tabs (Converted to Links) --- */
-        .nav-tabs {
-            display: flex;
-            background: var(--panel);
-            margin: 30px 8%;
-            padding: 8px;
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            gap: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            border-radius: 18px;
-            font-size: 10px;
-            font-weight: 800;
-            cursor: pointer;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .tab.active {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-2px);
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; transition: background 0.5s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; }
+        body { background: var(--bg); color: var(--text-main); min-height: 100vh; padding-bottom: 40px; -webkit-font-smoothing: antialiased; position: relative; overflow-x: hidden; }
         
-        .tab:hover:not(.active) {
-            background: rgba(255,255,255,0.05);
-            color: var(--text-main);
+        /* --- Ambient Blobs Background --- */
+        .ambient-container { position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1; pointer-events: none; filter: blur(70px); opacity: 0.85; }
+        .blob { position: absolute; width: 320px; height: 320px; border-radius: 50%; mix-blend-mode: multiply; animation: orbit 25s infinite linear; }
+        [data-theme="dark"] .ambient-container { opacity: 0.35; filter: blur(110px); }
+        .blob-one { background: var(--blob-1); top: 10%; left: 15%; animation-duration: 25s; }
+        .blob-two { background: var(--blob-2); bottom: 15%; right: 10%; animation-duration: 30s; animation-direction: reverse; }
+        .blob-three { background: var(--blob-3); top: 45%; left: 35%; animation-duration: 22s; }
+
+        @keyframes orbit {
+            0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+            33% { transform: translate(120px, 80px) scale(1.1) rotate(120deg); }
+            66% { transform: translate(-70px, 130px) scale(0.9) rotate(240deg); }
+            100% { transform: translate(0px, 0px) scale(1) rotate(360deg); }
         }
 
-        main { padding: 0 8% 100px; display: flex; justify-content: center; }
+        /* --- Header & Tabs --- */
+        header { background: var(--glass-bg); backdrop-filter: blur(50px) saturate(200%); -webkit-backdrop-filter: blur(50px) saturate(200%); padding: 18px 5%; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px var(--glass-shadow), inset 0 1px 1px var(--glass-highlight); }
+        .brand { font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; }
+        .brand span { color: var(--accent); }
+        .theme-toggle { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 14px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 1px var(--glass-highlight); }
         
-        .form-container { width: 100%; max-width: 800px; }
+        .nav-tabs { display: flex; background: var(--glass-bg); margin: 20px 4%; padding: 5px; border-radius: 99px; border: 1px solid var(--glass-border); gap: 5px; box-shadow: 0 10px 30px var(--glass-shadow); }
+        .tab { flex: 1; padding: 12px 5px; text-align: center; border-radius: 99px; font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; text-decoration: none; }
+        .tab.active { background: var(--input-bg); color: var(--accent); border: 1px solid var(--glass-border); }
+        
+        main { padding: 0 4%; position: relative; z-index: 1; display: flex; justify-content: center; }
+        
+        /* --- Forms & Glass Panels --- */
+        .form-container { width: 100%; max-width: 600px; }
+        
+        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--glass-border); border-radius: 20px; padding: 22px; margin-bottom: 15px; box-shadow: 0 15px 35px var(--glass-shadow), inset 0 1px 1px var(--glass-highlight); }
+        
+        .board-item { background: rgba(0,0,0,0.02); border: 1px dashed var(--glass-border); box-shadow: none; position: relative; }
+        [data-theme="dark"] .board-item { background: rgba(255,255,255,0.02); }
 
-        /* --- Card & Forms --- */
-        .card {
-            background: var(--panel);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 35px;
-            padding: 40px;
-            margin-bottom: 30px;
-            animation: fadeInUp 0.6s ease-out;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
+        .flex-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .flex-group > div { flex: 1; min-width: 130px; }
 
-        label {
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            display: block;
-            margin-left: 5px;
-        }
+        label { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; margin-left: 4px; display: block; letter-spacing: 0.5px; }
+        
+        input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 14px; color: var(--text-main); font-size: 14px; margin-bottom: 16px; outline: none; transition: 0.3s; }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        input[readonly] { color: var(--accent); font-weight: 700; }
 
-        input, select, textarea {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            padding: 18px;
-            color: white;
-            font-size: 14px;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            outline: none;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--accent);
-            background: rgba(212, 175, 55, 0.05);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        /* --- Premium Buttons --- */
-        .btn {
-            width: 100%;
-            padding: 20px;
-            border-radius: 20px;
-            border: none;
-            font-weight: 800;
-            font-size: 13px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 10px 25px var(--accent-glow);
-            animation: pulse 2s infinite;
-        }
-
-        .btn-primary:hover {
-            background: #fff;
-            transform: scale(1.02);
-        }
+        .action-btn { width: 100%; background: var(--accent); color: #fff; padding: 15px; border: none; border-radius: 14px; font-weight: 700; font-size: 12px; text-transform: uppercase; cursor: pointer; box-shadow: 0 4px 12px var(--accent-glow); margin-top: 10px; }
+        .outline-btn { background: var(--glass-bg); color: var(--text-main); border: 1px dashed var(--glass-border); box-shadow: none; margin-bottom: 10px; margin-top: 0; }
+        
+        .remove-btn { position: absolute; top: 15px; right: 15px; border: none; background: transparent; color: #ff3b30; font-weight: 700; font-size: 10px; cursor: pointer; padding: 5px; border-radius: 8px; }
+        .remove-btn:hover { background: rgba(255, 59, 48, 0.1); }
     </style>
 </head>
 <body>
 
+<div class="ambient-container">
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+    <div class="blob blob-three"></div>
+</div>
+
 <header>
-    <div class="brand">IND TECH <span>ERP CORE</span></div>
-    <div id="status" style="width: 12px; height: 12px; background: var(--success); border-radius: 50%; box-shadow: 0 0 15px var(--success);"></div>
+    <div class="brand">IND TECH <span>CORE</span></div>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌓 DARK MODE</button>
 </header>
 
 <div class="nav-tabs">
-    <a href="index.html" class="tab active">Registration</a>
+    <a href="index.html" class="tab active">Register</a>
     <a href="delivery.html" class="tab">Delivery</a>
-    <a href="history.html" class="tab">Audit History</a>
+    <a href="history.html" class="tab">History</a>
 </div>
 
 <main>
     <div class="form-container">
-        <div class="card">
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <label>TAG ID</label>
-                    <input type="text" id="tagNo" readonly placeholder="FETCHING..." style="color: var(--accent); font-weight: 800; border-color: var(--accent);">
+        
+        <div class="glass-panel">
+            <div class="flex-group">
+                <div>
+                    <label>Tag ID</label>
+                    <input type="text" id="tagNo" readonly placeholder="FETCHING...">
                 </div>
-                <div style="flex: 1; min-width: 200px;">
-                    <label>GATE PASS</label>
+                <div>
+                    <label>Gate Pass</label>
                     <input type="text" id="gatePass" placeholder="GP-000">
                 </div>
             </div>
             
-            <label>CLIENT FULL NAME</label>
-            <input type="text" id="client" placeholder="TYPE NAME HERE...">
-            
-            <div id="boardsContainer">
-                <div class="card board-item" style="background: rgba(255,255,255,0.02); border-style: dashed; padding: 25px;">
-                    <label>BOARD MODEL</label>
-                    <input type="text" class="bModel" placeholder="ENTER MODEL">
-                    
-                    <div style="display:flex; gap:15px; flex-wrap: wrap;">
-                        <div style="flex:1; min-width: 150px;"><label>PART</label><input type="text" class="bPart"></div>
-                        <div style="flex:1; min-width: 150px;"><label>SERIAL NO</label><input type="text" class="bSerial"></div>
-                    </div>
-                    
-                    <label>ISSUE / FAULT</label>
-                    <input type="text" class="bIssue">
-                    
-                    <label>REMARKS</label>
-                    <input type="text" class="bRemark">
-                </div>
-            </div>
-            
-            <button class="btn" style="background: rgba(255,255,255,0.05); color: white; margin-bottom: 20px; border: 1px solid var(--glass-border);" onclick="addBoard()">+ ATTACH ANOTHER BOARD</button>
-            <button class="btn btn-primary" id="saveBtn" onclick="saveData()">🚀 SYNC DATA TO CLOUD</button>
+            <label>Client Full Name</label>
+            <input type="text" id="client" placeholder="Enter Full Client Name" required>
         </div>
+
+        <div id="boardsContainer">
+            <div class="glass-panel board-item">
+                <label style="color: var(--text-main); font-size: 12px; margin-bottom: 12px;">Board Details</label>
+                
+                <label>Hardware Model</label>
+                <input type="text" class="bModel" placeholder="e.g. H61 / G41 / RTX 3060">
+                
+                <div class="flex-group">
+                    <div>
+                        <label>Part Details</label>
+                        <input type="text" class="bPart">
+                    </div>
+                    <div>
+                        <label>Serial Number</label>
+                        <input type="text" class="bSerial">
+                    </div>
+                </div>
+                
+                <label>Issue / Fault Description</label>
+                <input type="text" class="bIssue" placeholder="Describe the hardware problem...">
+                
+                <label>Internal Remark</label>
+                <input type="text" class="bRemark" placeholder="Optional internal notes">
+            </div>
+        </div>
+        
+        <button class="action-btn outline-btn" onclick="addBoard()">+ Attach Another Board</button>
+        <button class="action-btn" id="saveBtn" onclick="saveData()">Register Job Log</button>
+        
     </div>
 </main>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
+    // --- Theme Control (Synced with Delivery Page) ---
+    window.onload = () => {
+        if(localStorage.getItem('theme') === 'dark') { 
+            document.documentElement.setAttribute('data-theme', 'dark'); 
+            document.getElementById('themeBtn').innerText = "☀️ LIGHT MODE"; 
+        }
 
-    // Auto-fetch TAG ID when page loads
-    window.onload = () => { 
+        // Fetch Next Tag automatically
         fetch(scriptURL + "?action=getNextTag")
             .then(r => r.text())
             .then(t => { document.getElementById('tagNo').value = t; })
-            .catch(e => { 
-                console.error("Error fetching Tag ID");
-                document.getElementById('tagNo').value = "CONNECTION ERROR"; 
-            }); 
+            .catch(e => { document.getElementById('tagNo').value = "ERROR"; }); 
     };
 
-    // Add multiple boards function
+    function toggleTheme() {
+        if(document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.documentElement.removeAttribute('data-theme'); 
+            localStorage.setItem('theme', 'light'); 
+            document.getElementById('themeBtn').innerText = "🌓 DARK MODE";
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark'); 
+            localStorage.setItem('theme', 'dark'); 
+            document.getElementById('themeBtn').innerText = "☀️ LIGHT MODE";
+        }
+    }
+
+    // --- Backend URL ---
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyWdj8Jw_WDSrZx4pQTp2cqqDpWUoMLg32Aqk-bdIalxRYXDw5d1kkN9idO7IeQpMUrOw/exec';
+
+    // --- Add Multiple Boards Logic ---
     function addBoard() {
         const div = document.createElement('div'); 
-        div.className = 'card board-item';
-        div.style.background = 'rgba(255,255,255,0.01)'; 
-        div.style.borderStyle = 'dashed'; 
-        div.style.padding = '20px';
-        
+        div.className = 'glass-panel board-item';
         div.innerHTML = `
-            <button onclick="this.parentElement.remove()" style="float:right; border:none; background:none; color:var(--danger); font-weight:bold; font-size:10px; cursor:pointer; margin-bottom: 10px;">✕ REMOVE</button>
-            <div style="clear: both;"></div>
-            <label>MODEL</label><input type="text" class="bModel">
-            <div style="display:flex; gap:12px; flex-wrap: wrap;">
-                <div style="flex:1; min-width: 150px;"><label>PART</label><input type="text" class="bPart"></div>
-                <div style="flex:1; min-width: 150px;"><label>SERIAL</label><input type="text" class="bSerial"></div>
+            <button class="remove-btn" onclick="this.parentElement.remove()">✕ REMOVE</button>
+            <label style="color: var(--text-main); font-size: 12px; margin-bottom: 12px; margin-top: 5px;">Extra Board Details</label>
+            <label>Hardware Model</label>
+            <input type="text" class="bModel" placeholder="e.g. H61 / G41 / RTX 3060">
+            <div class="flex-group">
+                <div><label>Part Details</label><input type="text" class="bPart"></div>
+                <div><label>Serial Number</label><input type="text" class="bSerial"></div>
             </div>
-            <label>ISSUE</label><input type="text" class="bIssue">
-            <label>REMARKS</label><input type="text" class="bRemark">`;
-            
+            <label>Issue / Fault Description</label><input type="text" class="bIssue" placeholder="Describe the hardware problem...">
+            <label>Internal Remark</label><input type="text" class="bRemark" placeholder="Optional internal notes">`;
         document.getElementById('boardsContainer').appendChild(div);
     }
 
-    // Save Data to Google Sheets
+    // --- Save Data Logic ---
     function saveData() {
         const client = document.getElementById('client').value.toUpperCase();
         if(!client) return alert("CLIENT NAME REQUIRED!");
         
         const boards = [];
-        document.querySelectorAll('.board-item').forEach((item, i) => {
+        document.querySelectorAll('#boardsContainer .board-item').forEach((item, i) => {
             boards.push({
                 tag: document.getElementById('tagNo').value + "-" + String(i + 1).padStart(2, '0'),
                 model: item.querySelector('.bModel').value.toUpperCase(),
@@ -300,8 +227,10 @@
             });
         });
         
-        document.getElementById('saveBtn').innerText = "⏳ CLOUD SYNCING...";
-        
+        const btn = document.getElementById('saveBtn');
+        btn.innerText = "Syncing Database...";
+        btn.disabled = true;
+
         fetch(scriptURL, { 
             method: 'POST', 
             mode: 'no-cors', 
@@ -313,12 +242,13 @@
             })
         })
         .then(() => { 
-            alert("SUCCESSFULLY SAVED!"); 
+            alert("JOB REGISTERED SUCCESSFULLY!"); 
             location.reload(); 
         })
-        .catch(error => {
+        .catch(() => {
             alert("Error syncing to cloud.");
-            document.getElementById('saveBtn').innerText = "🚀 SYNC DATA TO CLOUD";
+            btn.innerText = "Register Job Log";
+            btn.disabled = false;
         });
     }
 </script>
